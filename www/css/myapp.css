@@ -1,0 +1,93 @@
+/* line 1, ../sass/_main.scss */
+.colorful {
+  color: #bb8833;
+}
+
+/* line 4, ../sass/_main.scss */
+.app {
+  user-select: none;
+  cursor: default;
+  margin: 10px;
+}
+/* line 9, ../sass/_main.scss */
+.app .chessboard {
+  margin: 1em auto;
+  width: 25em;
+}
+@media (max-width ) {
+
+}
+/* line 10, ../sass/_main.scss */
+.app .chessboard table {
+  width: 100%;
+  margin: 0 auto
+}
+/* line 12, ../sass/_main.scss */
+.app .chessboard table td {
+  position: relative;
+  border-radius: 3px;
+
+}
+.app .chessboard table td > div{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.alert {
+  width: 25em;
+  margin: 0 auto;
+}
+
+.btn {
+  padding: 1em 2em;
+  /* margin: 0 0.5em 0.5em 0; */
+  display: inline-block;
+  background-color: #ff5b5b;
+  border-radius: 9px;
+  border: 2px #e65650 solid;
+  border-bottom: 5px #e65050 solid;
+  color: white;
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+.btn:hover {
+  background-color: #e65650;
+
+}
+
+.red > div {
+  border: 3px solid rgb(230, 84, 84);
+  border-bottom: 7px solid rgb(230, 84, 84);
+  border-radius: 3px;
+}
+
+.white > div {
+  border: 3px solid #eaeaea;
+  border-bottom: 7px solid #eaeaea;
+  border-radius: 3px;
+}
+table {
+  background-color: white;
+}
+.app tbody tr {
+  border: none;
+}
+
+.app .chessboard table td:after {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.content {
+  font: bolder 2em 'Lato', sans-serif;
+
+
+}
