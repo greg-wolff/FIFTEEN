@@ -50,12 +50,14 @@ var app = function() {
         var down = curr + self.vue.size;
         var right = curr + 1;
         var left = curr - 1;
-        if (self.vue.board[left]=='0' && (dir=='left' || !dir) && (Math.floor(left/self.vue.size) == Math.floor(curr/self.vue.size))) {
+        if (self.vue.board[left]=='0' && (dir=='left' || !dir) &&
+            (Math.floor(left/self.vue.size) == Math.floor(curr/self.vue.size))) {
             tmp = self.vue.board[left];
-
             Vue.set(self.vue.board,left, self.vue.board[curr]);
             Vue.set(self.vue.board,curr, tmp);
-        } else if (self.vue.board[right]=='0' && (dir=='right' || !dir) && (Math.floor(right/self.vue.size) == Math.floor(curr/self.vue.size))) {
+
+        } else if (self.vue.board[right]=='0' && (dir=='right' || !dir) &&
+            (Math.floor(right/self.vue.size) == Math.floor(curr/self.vue.size))) {
             tmp = self.vue.board[right];
             Vue.set(self.vue.board,right, self.vue.board[curr]);
             Vue.set(self.vue.board,curr, tmp);
@@ -137,15 +139,12 @@ var app = function() {
                 }
             })
         },
-        computed: {
-            win() {
-                //var vm = this;
-                if (JSON.stringify(this.board) === JSON.stringify(Array.from(new Array((this.size ** 2) - 1), (val, index) => index + 1).concat([0])) && this.progress == true) {
+        watch: {
+            board: function() {
+                if (JSON.stringify(this.board) === JSON.stringify(Array.from(new Array((this.size ** 2) - 1), (val, index) => index + 1).concat([0])) && this.progress === true) {
                     this.notifyError('You win!', 'alert-success');
                     this.progress = false;
-                    return true;
-                } else
-                    return false;
+                }
             }
         },
         methods: {
@@ -170,18 +169,15 @@ var app = function() {
                 this.reset();
             },
             notifyError (txt, type) {
-                curr = document.getElementsByClassName('alert')[0];
-                if (curr) curr.parentNode.removeChild(curr);
-                msg = document.createElement("div");
-                msg.classList.add('alert', type);
-                msg.innerHTML = txt;
-                document.getElementById('vue-div').insertBefore(msg, document.getElementsByClassName('container')[0]);
-                $(".alert").slideDown("swing");
+                $('.alert').remove();
+                $("<div>").addClass('alert '+type)
+                                .html(txt)
+                                .prependTo('.chessboard')
+                                .hide()
+                                .slideDown('slow');
                 setTimeout(function() {
-                    $(".alert").slideDown("swing");
-                    $(".alert").hide();
-                    // 3000 for 3 seconds
-                }, 3000)
+                    $('.alert').slideUp('slow');
+                }, 3000);
             }
         }
     });
@@ -192,7 +188,7 @@ var app = function() {
 
 var APP = null;
 
-// This will make everything accessible from the js console;
+// This will make everything accessible from the js console
 // for instance, self.x above would be accessible as APP.x
 jQuery(function(){
     APP = app();
