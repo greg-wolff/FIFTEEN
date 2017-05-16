@@ -56,28 +56,42 @@
 
     <div id="vue-div" class="app" style="display:none">
 
-        <div class="container chessboard">
-            <table>
+        <div class="container">
+            <!--<table>
                 <tr v-for="i in Array.from(Array(size).keys())">
                     <td v-for="j in Array.from(Array(size).keys())" @click="move(i,j)"
                         v-bind:class="{red: board.filter(x =>
-                                                x && ((-1)**((x-1)%size+Math.floor((x-1)/size)))+1)
+                                                ((x-1)%size+Math.floor((x-1)/size))%2!=0)
                                                 .indexOf(board[size*i+j])!=-1,
                                        white: board.filter(x =>
-                                                x && (1-(-1)**((x-1)%size+Math.floor((x-1)/size))))
-                                                .indexOf(board[size*i+j])!=-1,
+                                                ((x-1)%size+Math.floor((x-1)/size))%2==0)
+                                                .indexOf(board[size*i+j])!=-1 && board[size*i+j]!=0,
                                        black: board[size*i+j] == 0}" class="content">
                         <div>${board[size*i + j]}</div>
                     </td>
                 </tr>
-            </table>
+            </table>-->
+            <div class="chessboard">.
+              <div v-for="i in Array.from(Array(size).keys())">
+                <div v-for="j in Array.from(Array(size).keys())" @click="move(i,j)"
+                    v-bind:class="{
+                                   red: board.filter(x =>
+                                            ((x-1)%size+Math.floor((x-1)/size))%2==0)
+                                            .indexOf(board[size*i+j])!=-1,
+                                   white: board.filter(x =>
+                                            ((x-1)%size+Math.floor((x-1)/size))%2!=0)
+                                            .indexOf(board[size*i+j])!=-1 && board[size*i+j]!=0,
+                                   black: board[size*i+j] == 0}" class="content">
+                                   <div>${board[size*i + j]}</div>
 
-        </div>
+                </div>
+              </div>
+            </div>
         <div class="container center resetbutton">
-            <button @click="minus" class="btn">-</button>
-            <button @click="plus" class="btn">+</button>
-            <button @click="reset" class="btn">Reset</button>
-            <button @click="shuffle" class="btn">Scramble</button>
+            <button @click="minus" class="btn small">-</button>
+            <button @click="plus" class="btn small">+</button>
+            <button @click="reset" class="btn medium">Reset</button>
+            <button @click="shuffle" class="btn medium">Scramble</button>
         </div>
 
     </div>
